@@ -1,16 +1,41 @@
-// import logo from './logo.svg';
 import './App.css';
-import ProductCard from './components/ProductCard';
-import Header from './components/Header';
-import Products from './components/Products';
-// import logo from './assets/img/logo.png';
+import Header from './components/Header/Header';
+import Products from './components/Products/Products';
+import Calendar from './components/Calendar/Calendar';
+import My_books from './components/My_books/My_books';
+import Footer from './components/Footer/Footer';
+import { Route, Routes } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
+import { decrement, increment } from './redux/counterSlice'
+
 
 function App() {
+  const count = useSelector((state) => state.counter.value)
+  const dispatch = useDispatch()
   return (
     <div className="App">
-      {/* <img src={logo} className='logo' /> */}
+      {/* <div>
+        <button
+          aria-label="Increment value"
+          onClick={() => dispatch(increment())}
+        >
+          Increment
+        </button>
+        <span>{count}</span>
+        <button
+          aria-label="Decrement value"
+          onClick={() => dispatch(decrement())}
+        >
+          Decrement
+        </button>
+      </div> */}
       <Header />
-      <Products/>
+      <Routes>
+        <Route path='/' element={<Products />} />
+        <Route path='/Calendar' element={<Calendar/>} />
+        <Route path='/My_books' element={<My_books />} />
+      </Routes>
+      <Footer />
     </div>
   );
 }
