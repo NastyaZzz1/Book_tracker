@@ -21,7 +21,7 @@ const Header = () => {
                 </ul>
                 <ul>
                     <img src={my_books} className={style.img}/>
-                    <Link to='/My_books'>Мои книги</Link>
+                    <Link to='/Want_books'>Мои книги</Link>
                 </ul>
                 <button className={style.button}>Войти</button>
             </nav>

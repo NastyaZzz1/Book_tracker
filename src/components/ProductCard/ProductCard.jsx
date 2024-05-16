@@ -1,13 +1,15 @@
 import React, {useState} from 'react';
 import style from './ProductCard.module.css';
+import { useDispatch } from 'react-redux';
+import { addItem } from '../../redux/cartSlice';
 
-const ProductCard = ({title, author, description}) => {
-  // const [value, setValue] = useState(0);
+const ProductCard = ({id, title, author, description, image}) => {
   const [isHovered, setIsHovered] = useState(false);
-  
-  // const onClickAdd = () => {
-  //   setValue(value + 1);
-  // };
+  const dispatch = useDispatch();
+
+  const onClickAdd = () => {
+    dispatch(addItem({ id, title, author, description, image}));
+  };
 
   const handleMouseEnter = () => {
     setIsHovered(true);
@@ -19,18 +21,17 @@ const ProductCard = ({title, author, description}) => {
   const styles = {
     image: {
     filter: isHovered ? "brightness(50%)" : "none",
-  }
-};
+    }
+  };
 
   const Image = () => {
     return (
-      <article className={style.article}>
+      <article className={style.article} >
+        <div className={style.background} ></div>
         <img 
           className={style.image}
-          style = {styles.image} 
-          // style="filter: brightness(50%);"
-          src="https://zabavniki.club/wp-content/uploads/open_book_31_12174654.jpg"
-        />
+          style = {styles.image}
+          src={image} />
         {isHovered && <p className={style.text}>{description}</p>}
        </article>
     );
@@ -43,14 +44,9 @@ const ProductCard = ({title, author, description}) => {
     className={style.item}>
     
       <Image/>
-      <p>{title}</p>
-      <p>{author}</p>
-      <button className={style.button}>Читать</button>
-      
-      {/* <div className="counter">
-        <p>{value}</p>
-        <button onClick={onClickAdd}>+</button>
-      </div> */}
+      <p className={style.title}>{title}</p>
+      <p className={style.author}>{author}</p>
+      <button onClick={onClickAdd} className={style.button}>Читать</button>
     </div>
   );
 } 

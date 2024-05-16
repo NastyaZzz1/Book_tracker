@@ -5,14 +5,8 @@ import axios from 'axios';
 import { useDispatch, useSelector } from 'react-redux';
 import { setProducts } from '../../redux/productsSlice';
 
-const Products = () => {
-
-    // const [products, setProducts] = useState([]);
-    
+const Products = () => {    
     const products = useSelector((state) => state.products.products);
-
-    console.log(products);
-
     const dispatch = useDispatch();
 
     const fetchItems = () => {
@@ -37,15 +31,15 @@ const Products = () => {
     //         fetchItems();
     //     });
     // }
-
+    
     return (
         <div className={style.contentProd}>
             {/* <button onClick={AddProduct}>ADD</button> */}
             <h1>Каталог</h1>
             <div className={style.items}>
-            {products.map((product) => (
-                <ProductCard key={product.id} {...product} />
-            ))}
+                {products.map((product) => (
+                    <ProductCard key={product.id} {...product} />
+                ))} 
             </div>
         </div>
     );
