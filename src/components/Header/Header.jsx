@@ -5,6 +5,8 @@ import calendar from '../../assets/img/calendar.svg';
 import my_books from '../../assets/img/my_books.svg';
 import logo from '../../assets/img/logo.svg';
 import { Link } from 'react-router-dom';
+import AuthModal from '../AuthModal/AuthModal';
+
 
 const Header = () => {
     return(
@@ -23,7 +25,7 @@ const Header = () => {
                     <img src={my_books} className={style.img}/>
                     <Link to='/Want_books'>Мои книги</Link>
                 </ul>
-                <button className={style.button}>Войти</button>
+                <AuthModal />
             </nav>
         </div>
     );

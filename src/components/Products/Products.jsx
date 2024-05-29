@@ -9,12 +9,15 @@ const Products = () => {
     const products = useSelector((state) => state.products.products);
     const dispatch = useDispatch();
 
-    const fetchItems = () => {
-        axios.get('https://66336d32f7d50bbd9b495a65.mockapi.io/items').then(res => {
-             dispatch(setProducts(res.data));
-        });
+    const fetchItems = async () => {
+        try{
+            const res = await axios.get('https://66336d32f7d50bbd9b495a65.mockapi.io/items');
+            dispatch(setProducts(res.data));
+        } catch (error){
+            console.log(error);
+        }
     }
-
+ 
     useEffect(() => {
         fetchItems();
     }, []);

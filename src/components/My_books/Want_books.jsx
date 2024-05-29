@@ -8,6 +8,11 @@ import { clearItems } from '../../redux/cartSlice';
 const Want_books = () => {
   const items = useSelector((state) => state.cart.items);
   const dispatch = useDispatch();
+
+  React.useEffect(() => {
+    localStorage.setItem('cartProducts', JSON.stringify(items));
+  }, [items]);
+
   return (
     <div className={style.contentBook}>
       <h1>Мои книги</h1>
