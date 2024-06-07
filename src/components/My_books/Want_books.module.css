@@ -7,3 +7,18 @@
     flex-wrap: wrap;
     gap: 6vh;
 } 
+
+.button {
+    width: 9em;
+    height: 2.2em;
+    color:rgb(163, 163, 163);
+    background-color: white;
+    border: 2px solid #6DCAFF;
+    border-radius: 18px;
+    font-weight: bold;
+}
+.button:hover {
+    border-color: #2DB3FF;
+    background-color: aliceblue;
+    color: rgb(134, 134, 134); 
+}

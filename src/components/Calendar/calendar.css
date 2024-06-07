@@ -1,0 +1,93 @@
+.react-calendar { 
+    width: 400px;
+    max-width: 100%;
+    background-color: #fff;
+    font-family: Arial, Helvetica, sans-serif;
+    line-height: 1.125em;
+    border: none;
+    /* margin: 30px 40px 20px; */
+}
+.react-calendar__navigation button {
+    color: #6f48eb;
+    min-width: 44px;
+    background: none;
+    margin-top: 8px;
+}
+.react-calendar__navigation button:enabled:hover,
+.react-calendar__navigation button:enabled:focus {
+    background-color: #f8f8fa;
+}
+.react-calendar__navigation button[disabled] {
+    background-color: #f0f0f0;
+}
+abbr[title] {
+    text-decoration: none;
+}
+.react-calendar__tile:enabled:hover,
+.react-calendar__tile:enabled:focus {
+    background: #f8f8fa;
+    color: #2DB3FF;
+    border-radius: 6px;
+    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.2);
+}
+.react-calendar__tile--now {
+    background: #6f48eb33;
+    border-radius: 6px;
+    font-weight: bold;
+    color: #2DB3FF;
+}
+.react-calendar__tile--now:enabled:hover,
+.react-calendar__tile--now:enabled:focus {
+    background: #6f48eb33;
+    border: 6px;
+    font-weight: bold;
+    /* color: #6f48eb; */
+}
+.react-calendar__tile--hasActive:enabled:hover,
+.react-calendar__tile--hasActive:enabled:focus {
+    background: #f8f8fa;
+}
+.react-calendar__tile--active {
+    border-radius: 6px;
+    font-weight: bold;
+    color: white;
+    box-shadow: 0 10px 24px rgba(45, 179, 255, 0.3);
+
+}
+.react-calendar__tile--active:enabled:hover,
+.react-calendar__tile--active:enabled:focus {
+    color: #2DB3FF;
+    box-shadow: 0 10px 24px rgba(45, 179, 255, 0.3);
+
+}
+.react-calendar--selectRange .react-calendar__tile--hover {
+    background-color: #f8f8fa;
+}
+.react-calendar__tile--range {
+    background: #f8f8fa;
+    color: #6f48eb;
+    border-radius: 6px;
+}
+.react-calendar__tile--rangeStart {
+    border: 6px;
+    color: #2DB3FF;
+}
+.react-calendar__tile--rangeEnd {
+    border: 6px;
+    color: #2DB3FF;
+}
+
+.react-calendar button {
+    margin: 6px;
+    font-size: 16px;
+    padding: 14px 0;
+    background-color: #f0f0f0;
+    border-radius: 6px;
+}
+.react-calendar__month-view__days {
+    display: grid !important;
+    grid-template-columns: 14.2% 14.2% 14.2% 14.2% 14.2% 14.2% 14.2%; 
+}
+.react-calendar__tile {
+    max-width: initial !important;
+}

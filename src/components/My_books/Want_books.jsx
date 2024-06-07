@@ -28,17 +28,17 @@ const Want_books = () => {
         </ul>
       </nav>
       <p>Книги, которые давно хотят прочитать</p>
-      <p>Добавлено <span>{items.length}</span></p>
+      <p>Добавлено -  <span>{items.length}</span></p>
+
+      <button className={style.button} onClick={() => {
+        dispatch(clearItems());
+      }}>Удалить все</button>
 
       <div className={style.items}>
         {items.map((obj) => (
           <CartItem key={obj.id} {...obj} />
         ))}
       </div>
-      
-      <button onClick={() => {
-        dispatch(clearItems());
-      }}>Clear</button>
     </div>
   )
 }

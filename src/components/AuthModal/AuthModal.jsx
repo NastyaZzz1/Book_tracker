@@ -1,7 +1,8 @@
-import React, { SubmitHandler, useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import style from './AuthModal.module.css';
 import Modal from 'react-modal';
+import axios from 'axios';
 import deletion from '../../assets/img/deletion.svg';
 import back from '../../assets/img/back.svg';
 
@@ -15,124 +16,156 @@ const AuthModal = () => {
         setModalIsOpen1(false);
     };
 
-    const [modalIsOpen2, setModalIsOpen2] = useState(false);
-    const openModal2 = () => {
-        setModalIsOpen2(true);
-    };
-    const closeModal2 = () => {
-        setModalIsOpen2(false);
-    };
+    const [step, setStep] = useState(1);
+    const [user_index, setIndex] = useState();
+    const [users, setUser] = useState([]);
 
-    const [modalIsOpen3, setModalIsOpen3] = useState(false);
-    const openModal3 = () => {
-        setModalIsOpen3(true);
-    };
-    const closeModal3 = () => {
-        setModalIsOpen3(false);
-    };
+    const{
+        register,
+        setError,
+        formState: { errors }, 
+        handleSubmit
+    } = useForm({
+        mode: "onBlur"
+    });
 
 
-    const{register, handleSubmit} = useForm();
+    const fetchItems = async () => {
+        try{
+            const res = await axios.get('https://66336d32f7d50bbd9b495a65.mockapi.io/users');
+            setUser(res.data);
+        } catch (error){
+            console.log(error);
+        }
+    }
+ 
+    useEffect(() => {
+        fetchItems();
+    }, []);
 
     const onSubmit = (data) => {
         console.log(data);
+        let marker = false
+        if (step === 1){
+            {users.map((user, index) => {
+                if(user.login === data.login){
+                    marker = true;
+                    setIndex(index);
+                }
+            })}
+            if (marker){
+                setStep(3);
+            } else {
+                setStep(2);
+            }
+        } else if (step === 2){
+            axios.post('https://66336d32f7d50bbd9b495a65.mockapi.io/users', data
+            ).then((res) => {
+                console.log(res.data);
+                fetchItems();
+            });
+            closeModal1();
+        } else {
+            if(data.password === users[user_index].password){
+                closeModal1();
+            } else {
+                setError('password', {
+                    type: "server",
+                    message: "Неверный пароль",
+                })
+            }
+        }
     }
-    
-
-    const modalContent_1 = (
-        <div>
-            <input onClick={closeModal1} type="image" src={deletion}></input>
-            <h2>Войти</h2>
-            <form onSubmit={handleSubmit(onSubmit)}>
-                <input {...register('login', {required: true})}/>
-                <br />
-                <button type="submit" 
-                    onClick={() => {
-                        openModal2();
-                        closeModal1();
-                      }}>
-                    Продолжить
-                </button>
-            </form>
-        </div>
-    );
-
-    const modalContent_2 = (
-        <div>
-            <input type="image"
-                src={back}
-                onClick={() => {
-                    openModal1();
-                    closeModal2();
-                }}>
-            </input>
-            <input onClick={closeModal2} type="image" src={deletion}></input>
-            <h2>Регистрация</h2>
-            <form onSubmit={handleSubmit}>
-                <label>
-                    Имя
-                    <br />
-                    <input {...register('name', {required: true})}/>
-                </label>
-                <br />
-                <label>
-                    Электронная почта
-                    <br />
-                    <input type="email" {...register('email', {required: true})} />
-                </label>
-                <br />
-                <label>
-                    Придумайте пароль
-                    <br />
-                    <input type="password" {...register('password', {required: true})}/>
-                </label>
-                <br />
-                <button type="submit"
-                    onClick={() => {
-                        openModal3();
-                        closeModal2();
-                    }}>
-                    Зарегистрироваться
-                </button>
-            </form>
-        </div>
-    );
-
-    const modalContent_3 = (
-        <div>
-            <input type="image"
-                src={back}
-                onClick={() => {
-                    openModal2();
-                    closeModal3();
-                }}>
-            </input>
-            <input onClick={closeModal3} type="image" src={deletion}></input>
-            <h2>Ввести пароль</h2>
-            <p>Введите пароль для</p>
-            <form onSubmit={handleSubmit}>
-                <input type="password" {...register('password', {required: true})} />
-                <br />
-                <button type="submit" onClick={closeModal3}>Войти</button>
-            </form>
-        </div>
-    );
 
 
     return (
     <div>
-        <button onClick={openModal1} className={style.button}>Войти</button>
+        <button onClick={openModal1} className={style.mainButton}>Войти</button>
         <Modal isOpen={modalIsOpen1} onRequestClose={closeModal1} className={style.contentAuth}>
-            {modalContent_1}
-        </Modal>
-        <Modal isOpen={modalIsOpen2} onRequestClose={closeModal2} className={style.contentAuth}>
-            {modalContent_2}
-        </Modal>
-        <Modal isOpen={modalIsOpen3} onRequestClose={closeModal3} className={style.contentAuth}>
-            {modalContent_3}
+            <input
+                className={style.deletionButton} 
+                onClick={closeModal1} 
+                type="image" 
+                src={deletion}>
+            </input>
+            <form onSubmit={handleSubmit(onSubmit)}>
+                {step === 1 && (
+                    <>
+                        <h2>Войти</h2>
+                        <input 
+                            placeholder="Введите логин"
+                            {...register('login', {
+                                required: "Поле обязательно к заполнению!",
+                            })}/>
+                        <div>
+                            {errors?.login && <p>{errors?.login?.message}</p>}
+                        </div>
+                        <button type="submit" className={style.button}>
+                            Продолжить
+                        </button>
+                    </>
+                )}
+                {step === 2 && (
+                    <>
+                        <input type="image"
+                            className={style.backButton}
+                            src={back}
+                            onClick={() => {setStep(1)}}>
+                        </input>
+                        <h2>Регистрация</h2>
+                        <p>Введите данные</p>
+                        <label>
+                            Электронная почта
+                            <input type="email"
+                            placeholder="supernastya@mail.ru"
+                            {...register('email', {
+                                required: "Поле обязательно к заполнению!",
+                            })} />
+                        </label>
+                        <div>
+                            {errors?.email && <p>{errors?.email?.message}</p>}
+                        </div>
+                        <label>
+                            Пароль
+                            <input type="password" {...register('password', {
+                                required: "Поле обязательно к заполнению!",
+                                minLength: {
+                                    value: 5,
+                                    message: "Минимум 5 символов",
+                                }
+                            })}/>
+                        </label>
+                        <div>
+                            {errors?.password && <p>{errors?.password?.message}</p>}
+                        </div>
+                        <button type="submit" className={style.button}>
+                            Зарегистрироваться
+                        </button>
+                    </>
+                )}
+                {step === 3 && (
+                    <>
+                        <input type="image"
+                            className={style.backButton}
+                            src={back}
+                            onClick={() => {setStep(1)}}>
+                        </input>
+                        <h2>Ввести пароль</h2>
+                        <input type="password" {...register('password', {
+                            required: "Поле обязательно к заполнению!",
+                        })} />
+                        <div>
+                            {errors?.password && <p>{errors?.password?.message}</p>}
+                        </div>
+                        <button type="submit" className={style.button}>
+                            Войти
+                        </button>
+                    </>
+                )} 
+            </form>
         </Modal>
     </div>
-    );
+    ); 
 }
 
 export default AuthModal;

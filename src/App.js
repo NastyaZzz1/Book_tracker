@@ -1,4 +1,3 @@
-import './App.css';
 import Header from './components/Header/Header';
 import Products from './components/Products/Products';
 import Calendar from './components/Calendar/Calendar';
@@ -6,11 +5,9 @@ import Want_books from './components/My_books/Want_books';
 import Books_read from './components/My_books/Read';
 import Books_reading from './components/My_books/Reading';
 import Footer from './components/Footer/Footer';
-import { Form, Route, Routes } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { decrement, increment } from './redux/counterSlice'
-import Forms from './components/Forms/Forms';
-import AuthModal from './components/AuthModal/AuthModal';
 
 
 function App() {
@@ -40,7 +37,6 @@ function App() {
         <Route path='/Reading' element={<Books_reading />} />
         <Route path='/Want_books' element={< Want_books/>} />
         <Route path='/Read' element={<Books_read />} />
-        <Route path='/Forms' element={<Forms />} />
       </Routes>
       <Footer />
     </div>
