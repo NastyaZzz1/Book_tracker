@@ -32,7 +32,8 @@ const AuthModal = () => {
 
     const fetchItems = async () => {
         try{
-            const res = await axios.get('https://66336d32f7d50bbd9b495a65.mockapi.io/users');
+            // const res = await axios.get('https://66336d32f7d50bbd9b495a65.mockapi.io/users');
+            const res = await axios.get('https://localhost:7099/swagger/index.html');
             setUser(res.data);
         } catch (error){
             console.log(error);
@@ -59,7 +60,12 @@ const AuthModal = () => {
                 setStep(2);
             }
         } else if (step === 2){
-            axios.post('https://66336d32f7d50bbd9b495a65.mockapi.io/users', data
+            // axios.post('https://66336d32f7d50bbd9b495a65.mockapi.io/users', data
+            // ).then((res) => {
+            //     console.log(res.data);
+            //     fetchItems();
+            // });
+            axios.post('https://localhost:7099/swagger/index.html', data
             ).then((res) => {
                 console.log(res.data);
                 fetchItems();
@@ -98,7 +104,7 @@ const AuthModal = () => {
                                 required: "Поле обязательно к заполнению!",
                             })}/>
                         <div>
-                            {errors?.login && <p>{errors?.login?.message}</p>}
+                            {errors?.login && <p className={style.error}>{errors?.login?.message}</p>}
                         </div>
                         <button type="submit" className={style.button}>
                             Продолжить
@@ -123,7 +129,7 @@ const AuthModal = () => {
                             })} />
                         </label>
                         <div>
-                            {errors?.email && <p>{errors?.email?.message}</p>}
+                            {errors?.email && <p className={style.error}>{errors?.email?.message}</p>}
                         </div>
                         <label>
                             Пароль
@@ -136,7 +142,7 @@ const AuthModal = () => {
                             })}/>
                         </label>
                         <div>
-                            {errors?.password && <p>{errors?.password?.message}</p>}
+                            {errors?.password && <p className={style.error}>{errors?.password?.message}</p>}
                         </div>
                         <button type="submit" className={style.button}>
                             Зарегистрироваться
@@ -155,7 +161,7 @@ const AuthModal = () => {
                             required: "Поле обязательно к заполнению!",
                         })} />
                         <div>
-                            {errors?.password && <p>{errors?.password?.message}</p>}
+                            {errors?.password && <p className={style.error}>{errors?.password?.message}</p>}
                         </div>
                         <button type="submit" className={style.button}>
                             Войти

@@ -28,14 +28,15 @@ const Header = () => {
 
 
     return(
+        <>
+        <style>{`
+            .highlight {
+                background-color: #D3EFFF;
+                border-radius: 3px;
+            }`}
+        </style>
         <div className={style.header}>
             <img src={logo} className={style.logo} />
-            <style>{`
-                .highlight {
-                    background-color: #D3EFFF;
-                    border-radius: 3px;
-                }`}
-            </style>
             <nav>
                 <ul>
                     <img src={catalog} className={style.img}/>
@@ -52,6 +53,7 @@ const Header = () => {
                 <AuthModal />
             </nav>
         </div>
+        </>
     );
 } 
 

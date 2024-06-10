@@ -3,13 +3,17 @@ import style from './CartItem.module.css';
 import deletion from '../../assets/img/deletion.svg';
 import { useDispatch } from 'react-redux';
 import { deleteItem } from '../../redux/cartSlice';
+import { useNavigate } from 'react-router-dom';
 
 
 const CartItem = ({id, title, author, description, image}) => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const onClickDelete = () => {
       dispatch(deleteItem({ id }));
   };
+
+  const BookTextPage = () => navigate('/Books_pdf');
 
   const [isHovered, setIsHovered] = useState(false);
   const handleMouseEnter = () => {
@@ -49,9 +53,14 @@ const CartItem = ({id, title, author, description, image}) => {
         src={deletion}>
       </input>
       <Image />
-      <p>{title}</p>
-      <p>{author}</p>
-      <button className={style.button}>Открыть книгу</button>
+      <p className={style.title}>{title}</p>
+      <p className={style.author}>{author}</p>
+      <button 
+        className={style.button} 
+        onClick={BookTextPage}
+      >
+        Открыть книгу
+      </button>
     </div>
   );
 };

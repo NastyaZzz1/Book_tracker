@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import ProductCard from '../ProductCard/ProductCard';
 import style from './Products.module.css';
 import axios from 'axios';
@@ -21,23 +21,9 @@ const Products = () => {
     useEffect(() => {
         fetchItems();
     }, []);
-
-    // const AddProduct = () => {
-    //     axios.post('https://66336d32f7d50bbd9b495a65.mockapi.io/items', {
-    //         id: 9,
-    //         title: 'Война и мир', 
-    //         author: 'Толстой',
-    //         }, 
-    //         { 'contet-type' : 'application/jsion' },
-    //     ).then((res) => {
-    //         console.log(res.data);
-    //         fetchItems();
-    //     });
-    // }
     
     return (
         <div className={style.contentProd}>
-            {/* <button onClick={AddProduct}>ADD</button> */}
             <h1>Каталог</h1>
             <div className={style.items}>
                 {products.map((product) => (

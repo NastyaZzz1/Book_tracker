@@ -1,0 +1,28 @@
+.content {
+    margin: 11vh 7vh 0 7vh;
+}
+
+canvas {
+    margin: auto;
+}
+
+.button, .buttonBack {
+    min-width: 6em;
+    padding: 2px 15px;
+    width: fit-content;
+    height: 2.2em;
+    background-color: #6DCAFF;
+    border: none;
+    color: white;
+    border-radius: 18px;
+    font-weight: bold;    
+}
+.button:hover, .mainButton:hover{
+    background-color: #2DB3FF;
+}
+.button {
+    margin: 10px 25px 20px;
+}
+.pages_num_and_nav {
+    text-align: center;
+}

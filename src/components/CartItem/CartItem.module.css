@@ -15,6 +15,7 @@
     color: white;
     border-radius: 18px;
     font-weight: bold;
+    margin: 10px 24%;
 }
 .button:hover {
     background-color: #2DB3FF;
@@ -24,6 +25,7 @@
     position: relative;
     left: 96%;
     bottom: 3%;
+    margin: 0;
 }
 
 
@@ -64,4 +66,17 @@
     height: 100%;
     left: 20%;
 }
+
+.title {
+    font-family: ALS Sirius, Arial, Helvetica Neue, Helvetica, sans-serif;
+    font-size: 15px;
+    font-weight: 500;
+    margin: 5px 15px 3px;
+}
+.author {
+    font-size: 14px;
+    line-height: 105%;
+    margin: 0px 15px;
+}
+
 

@@ -9,7 +9,7 @@
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
     height: 350px;
     width: 300px;
-    background-color: bisque;
+    background-color: rgb(244, 237, 229);
 }
 
 .button, .mainButton {
@@ -23,25 +23,35 @@
     border-radius: 18px;
     font-weight: bold;
 }
-/* .button:hover, .mainButton:hover{
+.button:hover, .mainButton:hover{
     background-color: #2DB3FF;
 }
 .button:focus, .mainButton:focus{
     background-color: #14a9ff;
-} */
+}
 
 .mainButton{
     margin-left: 25px;
+}
+.button {
+    margin: 0 20%;
 }
 
 .deletionButton{
     position: relative;
     left: 102%;
-    bottom: 21px;
+    bottom: 30px;
     width: 23px;
     height: 23px;
 }
 
 input{
     display: flex;
+    margin: 10px 0;
+}
+
+.error {
+    margin: 5px 0;
+    font-size: 14px;
+    color: red;
 }

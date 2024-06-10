@@ -6,30 +6,13 @@ import Books_read from './components/My_books/Read';
 import Books_reading from './components/My_books/Reading';
 import Footer from './components/Footer/Footer';
 import { Route, Routes } from 'react-router-dom';
-import { useSelector, useDispatch } from 'react-redux';
-import { decrement, increment } from './redux/counterSlice'
+import Books_pdf from './components/Books_pdf/Books_pdf';
+
 
 
 function App() {
-  const count = useSelector((state) => state.counter.value)
-  const dispatch = useDispatch()
   return (
     <div className="App">
-      {/* <div>
-        <button
-          aria-label="Increment value"
-          onClick={() => dispatch(increment())}
-        >
-          Increment
-        </button>
-        <span>{count}</span>
-        <button
-          aria-label="Decrement value"
-          onClick={() => dispatch(decrement())}
-        >
-          Decrement
-        </button>
-      </div> */}
       <Header />
       <Routes>
         <Route path='/' element={<Products />} />
@@ -37,6 +20,7 @@ function App() {
         <Route path='/Reading' element={<Books_reading />} />
         <Route path='/Want_books' element={< Want_books/>} />
         <Route path='/Read' element={<Books_read />} />
+        <Route path='/Books_pdf' element={<Books_pdf />} />
       </Routes>
       <Footer />
     </div>
