@@ -18,7 +18,16 @@ const AuthModal = () => {
 
     const [step, setStep] = useState(1);
     const [user_index, setIndex] = useState();
-    const [users, setUser] = useState([]);
+    const [users, setUsers] = useState([]);
+
+    const [user, setRegister] = useState(false);
+    const Login = (userName) => {
+        setRegister(userName);
+    };
+    const Logout = () => {
+        setRegister(false);
+    };
+
 
     const{
         register,
@@ -32,9 +41,9 @@ const AuthModal = () => {
 
     const fetchItems = async () => {
         try{
-            // const res = await axios.get('https://66336d32f7d50bbd9b495a65.mockapi.io/users');
-            const res = await axios.get('https://localhost:7099/swagger/index.html');
-            setUser(res.data);
+            const res = await axios.get('https://66336d32f7d50bbd9b495a65.mockapi.io/users');
+            // const res = await axios.get('https://localhost:7099/swagger/index.html');
+            setUsers(res.data);
         } catch (error){
             console.log(error);
         }
@@ -60,19 +69,21 @@ const AuthModal = () => {
                 setStep(2);
             }
         } else if (step === 2){
-            // axios.post('https://66336d32f7d50bbd9b495a65.mockapi.io/users', data
-            // ).then((res) => {
-            //     console.log(res.data);
-            //     fetchItems();
-            // });
-            axios.post('https://localhost:7099/swagger/index.html', data
+            axios.post('https://66336d32f7d50bbd9b495a65.mockapi.io/users', data
             ).then((res) => {
                 console.log(res.data);
                 fetchItems();
             });
+            // axios.post('https://localhost:7099/swagger/index.html', data
+            // ).then((res) => {
+            //     console.log(res.data);
+            //     fetchItems();
+            // });
+            Login(data.login);
             closeModal1();
         } else {
             if(data.password === users[user_index].password){
+                Login(data.login);
                 closeModal1();
             } else {
                 setError('password', {
@@ -86,7 +97,11 @@ const AuthModal = () => {
 
     return (
     <div>
-        <button onClick={openModal1} className={style.mainButton}>Войти</button>
+        { user ? 
+            <button onClick={openModal1} className={style.mainButton}>{ user }</button>
+            : 
+            <button onClick={openModal1} className={style.mainButton}>Войти</button> 
+        }
         <Modal isOpen={modalIsOpen1} onRequestClose={closeModal1} className={style.contentAuth}>
             <input
                 className={style.deletionButton} 

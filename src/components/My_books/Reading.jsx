@@ -1,12 +1,10 @@
 import React from 'react';
-import style from './Want_books.module.css';
-import Nav from './Nav';
+import style from './My_books.module.css';
 
 
 const Books_reading = () => {
   return (
-    <div className={style.contentBook}>
-      <Nav />
+    <div>
       <p>Книги, которые читают сейчас</p>
     </div>
   )

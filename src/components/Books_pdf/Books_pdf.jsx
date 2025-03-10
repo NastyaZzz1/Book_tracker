@@ -4,7 +4,9 @@ import style from './Books_pdf.module.css';
 import { useNavigate } from 'react-router-dom';
 
 
-const url = "https://cors-anywhere.herokuapp.com/https://narrative.onlinemodule.ru/wp-content/uploads/2021/11/vino-iz-oduvanchikov_2705.pdf";
+// const url = "https://cors-anywhere.herokuapp.com/https://narrative.onlinemodule.ru/wp-content/uploads/2021/11/vino-iz-oduvanchikov_2705.pdf";
+
+const url = "https://cors-anywhere.herokuapp.com/https://tocit.ru/static/files/cb8086855d3d7fa3db79c8ce6d977c368d61f257108d0d7568bc5cd0591a4b69.pdf";
 
 pdfjs.GlobalWorkerOptions.workerSrc =  `//cdnjs.cloudflare.com/ajax/libs/pdf.js/4.3.136/pdf.worker.min.mjs`;
 
@@ -29,7 +31,7 @@ const Books_pdf = () => {
         changePage(1); 
     }
 
-    const CartItemPage = () => navigate('/Want_books');
+    const CartItemPage = () => navigate('/my_books/want_books');
 
     return (
     <div className={style.content}>

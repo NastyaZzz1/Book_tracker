@@ -1,8 +1,7 @@
 import React from 'react';
-import style from './Want_books.module.css';
+import style from './My_books.module.css';
 import { useDispatch, useSelector } from 'react-redux';
 import CartItem from '../CartItem/CartItem';
-import Nav from './Nav';
 import { clearItems } from '../../redux/cartSlice';
 
 const Want_books = () => {
@@ -14,8 +13,7 @@ const Want_books = () => {
   }, [items]);
 
   return (
-    <div className={style.contentBook}>
-      <Nav />
+    <div>
       <p>Книги, которые давно хотят прочитать</p>
       <p>Добавлено -  <span>{items.length}</span></p>
 

@@ -1,13 +1,16 @@
 import React, { useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Outlet } from 'react-router-dom';
+import style from './My_books.module.css';
+
 
 const Nav = () => {
     useEffect(() => {
         const yourbuttons = Array.from(
           document.getElementsByClassName('highlightHoverChild')
         );
+        var currentbtn = document.getElementsByClassName('highlightHoverChild highlight')[0];
         for (var i = yourbuttons.length - 1; i >= 0; i--) {
-            var currentbtn;
+            console.log(currentbtn);
             yourbuttons[i].onclick=function(){
             if(currentbtn){
                 currentbtn.classList.remove("highlight");
@@ -26,19 +29,20 @@ const Nav = () => {
             border-radius: 3px;
         }`}
     </style>
-    <div>
+    <div className={style.contentBook}>
         <h1>Мои книги</h1>
         <nav>
             <ul>
-                <Link className="highlightHoverChild" to="/Want_books">Хочу прочитать</Link>
+                <Link className="highlightHoverChild highlight" to="/my_books/want_books">Хочу прочитать</Link>
             </ul>
             <ul>
-                <Link className="highlightHoverChild" to='/Reading'>Читаю сейчас</Link>
+                <Link className="highlightHoverChild" to='/my_books/reading'>Читаю сейчас</Link>
             </ul>
             <ul>
-                <Link className="highlightHoverChild" to="/Read">Прочитано</Link>
+                <Link className="highlightHoverChild" to="/my_books/read">Прочитано</Link>
             </ul>
         </nav>
+        <Outlet />
     </div>
     </>
     );

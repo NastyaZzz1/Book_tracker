@@ -48,7 +48,7 @@ const Header = () => {
                 </ul>
                 <ul>
                     <img src={my_books} className={style.img}/>
-                    <Link className="highlightHover" to='/Want_books'>Мои книги</Link>
+                    <Link className="highlightHover" to='/my_books/want_books'>Мои книги</Link>
                 </ul>
                 <AuthModal />
             </nav>
